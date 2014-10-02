@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'ui.sortable',
     'LocalStorageModule',
-    'clockworkAPI'
+    'clockworkAPI',
+    'ui.bootstrap'
   ])
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){
         localStorageServiceProvider.setPrefix('ls');

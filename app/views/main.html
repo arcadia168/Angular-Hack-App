@@ -1,23 +1,80 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<div class="container">
+    <h2>My Events!</h2>
+    <!-- Events input -->
+    <!-- Todos input -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Create a new event and invite people here!
+        </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+        <div class="input-group" style="margin: 10px 10px;">
+            <input type="text" ng-model="occasion.name" placeholder="What's happening soon?" class="form-control">
+            <span class="input-group-btn">
+                <input type="submit" class="btn btn-primary" value="Create Event!" ng-click="addOccasion()">
+            </span>
+        </div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+        <!-- Date picker to assign a date to the event also -->
+        <div style="display:inline-block; min-height:290px; margin: 10px 200px; margin-bottom: 5px;">
+            <datepicker ng-model="occasion.dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+        </div>
+        <!--<div class="row" style="margin: 10px 10px;">-->
+            <!--<div class="col-md-6">-->
+                <!--<p class="input-group">-->
+                    <!--<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="occasion.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />-->
+              <!--<span class="input-group-btn">-->
+                <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+              <!--</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+        <!-- Make this a form -->
+        <div class="panel panel-default" style="margin: 10px 10px;">
+            <div class="panel-heading">
+                Invite people!
+            </div>
+            <div class="input-group" style="margin: 10px 10px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> Name</span>
+                <input type="text" class="form-control" ng-model="invitee.name" placeholder="Who do you want to invite?">
+            </div>
+            <div class="input-group" style="margin: 10px 10px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span> Number</span>
+                <input type="text" class="form-control" ng-model="invitee.number" placeholder="What's their number?">
+            </div>
+            <button class="btn-sm" ng-click="addInvitee()" style="margin: 10px 10px;"><span class="glyphicon glyphicon-envelope"></span> Invite them! </button>
+        </div>
+    </div>
+    <p></p>
+
+    <!-- Events list -->
+    <div ui-sortable ng-model="occasions" class="row" style="margin: 10px 10px;">
+        <div class="input-group" ng-repeat="occasion in occasions" style="padding:5px 10px; cursor: move;">
+
+
+            <div class="col-lg-6">
+                <div class="input-group row">
+                    <span class="input-group-addon">{{occasion.dt | date:'fullDate'}}</span>
+                    <input type="text" ng-model="occasion.name" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="removeOccasion($index)" type="button" aria-label="Remove">X</button>
+                        </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+
+            <!--<div>-->
+                <!--<span class="label label-default">{{occasion.dt | date:'fullDate'}}</span>-->
+                <!--<input type="text" ng-model="occasion.name" class="form-control"/>-->
+                <!--&lt;!&ndash;<span class="input-group-btn">&ndash;&gt;-->
+                    <!--<button class="btn-sm btn-danger" ng-click="removeOccasion($index)" aria-label="Remove">X</button>-->
+                <!--</span>-->
+            <!--</div>-->
+
+                <!--{{occasion.invitees | json}}-->
+                <span ng-repeat="invitee in occasion.invitees" style="margin: 3px 15px; margin-right: 1px;">
+                    <span class="label label-default"> Invitee: {{invitee.name}}  R.S.V.P: {{invitee.attending}}</span>
+                </span>
+
+        </div>
+    </div>
 </div>
